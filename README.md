@@ -1,4 +1,4 @@
-# Interest Calculator
+# Interest Calculator 🤑
 
 A tool designed to calculate interest rates for term deposits using simple and compound formulas.
 
