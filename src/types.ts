@@ -7,6 +7,7 @@ export enum FIELD_NAMES {
   compoundFrequency = "compoundFrequency",
 }
 
+// interest paid at maturity doesn't compound, so don't include in this enum
 export enum COMPOUND_FREQUENCIES {
   monthly = "monthly",
   quarterly = "quarterly",
