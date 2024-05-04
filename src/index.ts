@@ -3,20 +3,26 @@ import { TermDeposit } from "./classes/term-deposit";
 import { COMPOUND_FREQUENCIES, FIELD_NAMES, termDepositSchema } from "./types";
 import { getAccumulatedValue } from "./get-accumulated-value";
 import { mapUserInput } from "./map-user-input";
+import { validatePrinciple } from "./validate-principle";
+import { validateAnnualRate } from "./validate-annual-rate";
+import { validateMonths } from "./validate-months";
 
 const app = async () => {
   const userInput = {
     [FIELD_NAMES.principle]: await input({
       message: "What is your starting amount?",
       default: "10000",
+      validate: validatePrinciple,
     }),
     [FIELD_NAMES.annualRate]: await input({
       message: "What is your interest rate (% per annum)?",
       default: "3.5",
+      validate: validateAnnualRate,
     }),
     [FIELD_NAMES.months]: await input({
       message: "How many months will this term deposit last?",
       default: "12",
+      validate: validateMonths,
     }),
     [FIELD_NAMES.compoundFrequency]: await select({
       message: "How often should interest compound?",
