@@ -17,7 +17,7 @@ const COMPOUND_FREQUENCY_VALUES = {
   [COMPOUND_FREQUENCIES.quarterly]: 4,
   [COMPOUND_FREQUENCIES.annually]: 1,
   [COMPOUND_FREQUENCIES.maturity]: 0,
-} as const;
+};
 
 export type CompoundFrequency =
   (typeof COMPOUND_FREQUENCY_VALUES)[COMPOUND_FREQUENCIES];
@@ -27,6 +27,13 @@ export type TermDeposit = {
   annualRate: number;
   months: number;
   compoundFrequency: CompoundFrequency;
+};
+
+export type UnsafeInput = {
+  principle: string;
+  annualRate: string;
+  months: string;
+  compoundFrequency: string;
 };
 
 export { COMPOUND_FREQUENCY_VALUES };

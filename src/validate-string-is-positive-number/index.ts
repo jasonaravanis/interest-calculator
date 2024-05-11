@@ -1,4 +1,8 @@
-// Used for rendering useful error messages to user when recieving input via CLI
+/**
+ * This function is only used to provide useful error messages when recieving input via the CLI.
+ * It should not be used for validating term deposit input. Instead, use validateTermDepositInput();
+ */
+
 const validateStringIsPositiveNumber = (input: string): boolean | string => {
   if (typeof input !== "string") {
     return "Input is not a string";

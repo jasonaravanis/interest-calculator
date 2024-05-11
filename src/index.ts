@@ -1,67 +1,66 @@
 import { input, select } from "@inquirer/prompts";
-import { TermDeposit } from "./classes/term-deposit";
-import { COMPOUND_FREQUENCIES, FIELD_NAMES, termDepositSchema } from "./types";
+import {
+  COMPOUND_FREQUENCIES,
+  COMPOUND_FREQUENCY_VALUES,
+  FIELD_NAMES,
+} from "./types";
 import { getAccumulatedValue } from "./get-accumulated-value";
-import { mapUserInput } from "./map-user-input";
-import { validatePrinciple } from "./validate-principle";
-import { validateAnnualRate } from "./validate-annual-rate";
-import { validateMonths } from "./validate-months";
+import { createTermDeposit } from "./create-term-deposit";
+import { validateStringIsPositiveNumber } from "./validate-string-is-positive-number";
 
 const app = async () => {
   const userInput = {
     [FIELD_NAMES.principle]: await input({
       message: "What is your starting amount?",
       default: "10000",
-      validate: validatePrinciple,
+      validate: validateStringIsPositiveNumber,
     }),
     [FIELD_NAMES.annualRate]: await input({
       message: "What is your interest rate (% per annum)?",
       default: "3.5",
-      validate: validateAnnualRate,
+      validate: validateStringIsPositiveNumber,
     }),
     [FIELD_NAMES.months]: await input({
       message: "How many months will this term deposit last?",
       default: "12",
-      validate: validateMonths,
+      validate: validateStringIsPositiveNumber,
     }),
     [FIELD_NAMES.compoundFrequency]: await select({
       message: "How often should interest compound?",
       choices: [
         {
-          name: "monthly",
-          value: COMPOUND_FREQUENCIES.monthly,
+          name: COMPOUND_FREQUENCIES.monthly,
+          value: String(
+            COMPOUND_FREQUENCY_VALUES[COMPOUND_FREQUENCIES.monthly]
+          ),
           description: "Interest will compound 12 times per year.",
         },
         {
-          name: "quarterly",
-          value: COMPOUND_FREQUENCIES.quarterly,
+          name: COMPOUND_FREQUENCIES.quarterly,
+          value: String(
+            COMPOUND_FREQUENCY_VALUES[COMPOUND_FREQUENCIES.quarterly]
+          ),
           description: "Interest will compound 4 times per year.",
         },
         {
-          name: "annually",
-          value: COMPOUND_FREQUENCIES.annually,
+          name: COMPOUND_FREQUENCIES.annually,
+          value: String(
+            COMPOUND_FREQUENCY_VALUES[COMPOUND_FREQUENCIES.annually]
+          ),
           description: "Interest will compound once per year.",
         },
         {
-          name: "at maturity",
-          value: "maturity",
+          name: COMPOUND_FREQUENCIES.maturity,
+          value: String(
+            COMPOUND_FREQUENCY_VALUES[COMPOUND_FREQUENCIES.maturity]
+          ),
           description: "Interest will not compound.",
         },
       ],
     }),
   };
 
-  const mappedUserInput = mapUserInput(userInput);
-
-  const validationResult = termDepositSchema.safeParse(mappedUserInput);
-
-  if (!validationResult.success) {
-    console.log("Sorry, something went wrong!");
-    console.log(validationResult.error);
-    return;
-  }
-
-  const termDeposit = new TermDeposit(validationResult.data);
+  const termDeposit = createTermDeposit(userInput);
 
   const value = getAccumulatedValue(termDeposit);
 
