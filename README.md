@@ -45,7 +45,6 @@ Build and run
 ### Dependencies:
 
 - [@inquirer/prompts](https://www.npmjs.com/package/inquirer): Interactive command-line user interface.
-- [zod](https://zod.dev): Schema validation for TypeScript.
 
 ### Dev Dependencies:
 
