@@ -1,5 +1,5 @@
 import { getCompoundInterest } from ".";
-import { TermDeposit } from "../classes/term-deposit";
+import type { TermDeposit } from "../types";
 import { COMPOUND_FREQUENCIES, COMPOUND_FREQUENCY_VALUES } from "../types";
 
 it.each`
@@ -9,12 +9,12 @@ it.each`
 `(
   "calculates correct compound interest",
   ({ principle, annualRate, months, compoundFrequency, result }) => {
-    const testDeposit = new TermDeposit({
+    const testDeposit: TermDeposit = {
       principle,
       months,
       annualRate,
       compoundFrequency: COMPOUND_FREQUENCY_VALUES[compoundFrequency],
-    });
+    };
     expect(getCompoundInterest(testDeposit)).toBe(result);
   }
 );

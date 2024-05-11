@@ -1,7 +1,7 @@
 import { getAccumulatedValue } from ".";
 import * as compound from "../get-compound-interest";
 import * as simple from "../get-simple-interest";
-import { TermDeposit } from "../classes/term-deposit";
+import type { TermDeposit } from "../types";
 import { COMPOUND_FREQUENCIES, COMPOUND_FREQUENCY_VALUES } from "../types";
 
 beforeEach(() => {
@@ -15,12 +15,12 @@ it.each`
 `(
   "calculates correct accumulated value",
   ({ principle, annualRate, months, compoundFrequency, result }) => {
-    const testDeposit = new TermDeposit({
+    const testDeposit: TermDeposit = {
       principle,
       months,
       annualRate,
       compoundFrequency: COMPOUND_FREQUENCY_VALUES[compoundFrequency],
-    });
+    };
     expect(getAccumulatedValue(testDeposit)).toBe(result);
   }
 );
@@ -29,11 +29,12 @@ it("uses simple interest calculator for deposit with interest paid at maturity",
   const compoundSpy = jest.spyOn(compound, "getCompoundInterest");
   const simpleSpy = jest.spyOn(simple, "getSimpleInterest");
 
-  const deposit = new TermDeposit({
+  const deposit: TermDeposit = {
     principle: 10000,
     annualRate: 0.011,
     months: 36,
-  });
+    compoundFrequency: COMPOUND_FREQUENCY_VALUES[COMPOUND_FREQUENCIES.maturity],
+  };
 
   getAccumulatedValue(deposit);
   expect(compoundSpy).not.toHaveBeenCalled();
@@ -46,12 +47,12 @@ it.each(Object.keys(COMPOUND_FREQUENCIES))(
     const compoundSpy = jest.spyOn(compound, "getCompoundInterest");
     const simpleSpy = jest.spyOn(simple, "getSimpleInterest");
 
-    const deposit = new TermDeposit({
+    const deposit: TermDeposit = {
       principle: 10000,
       annualRate: 0.011,
       months: 36,
       compoundFrequency: COMPOUND_FREQUENCIES[compoundFrequency],
-    });
+    };
 
     getAccumulatedValue(deposit);
     expect(compoundSpy).toHaveBeenCalled();

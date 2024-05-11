@@ -1,8 +1,9 @@
-import { TermDeposit } from "../classes/term-deposit";
+import type { TermDeposit } from "../types";
+import { getYears } from "../get-years";
 import { roundNumber } from "../round-number";
 
 const getCompoundInterest = (deposit: TermDeposit): number => {
-  const compoundCount = deposit.compoundFrequency * deposit.getYears();
+  const compoundCount = deposit.compoundFrequency * getYears(deposit.months);
   const monthlyAnnualisedInterestRate =
     deposit.annualRate / deposit.compoundFrequency;
 

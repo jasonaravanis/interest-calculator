@@ -1,4 +1,4 @@
-import { TermDeposit } from "../classes/term-deposit";
+import type { TermDeposit } from "../types";
 import { getCompoundInterest } from "../get-compound-interest";
 import { getSimpleInterest } from "../get-simple-interest";
 
