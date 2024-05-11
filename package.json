@@ -7,7 +7,7 @@
     "test": "jest --watch",
     "dev": "nodemon src/index.ts",
     "build": "tsc",
-    "prod": "pnpm build && cd dist && node index.js"
+    "prod": "tsc && cd dist && node index.js"
   },
   "keywords": [],
   "author": "",
