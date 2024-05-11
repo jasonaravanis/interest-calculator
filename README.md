@@ -1,11 +1,11 @@
-# Interest Calculator
+# Interest Calculator 🤑
 
 A tool designed to calculate interest rates for term deposits using simple and compound formulas.
 
 ## System Requirements
 
-- Node.js [20.10](https://nodejs.org/en/download) or later
-- [pnpm](https://pnpm.io/installation#using-npm) package manager
+- Node.js [18.12](https://nodejs.org/en/download) or later
+- [pnpm](https://pnpm.io/installation#using-npm) package manager (with Node installed, you can install pnpm via `npm install -g pnpm`)
 
 ## Installation
 
