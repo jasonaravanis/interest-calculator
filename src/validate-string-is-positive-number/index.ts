@@ -1,4 +1,4 @@
-// Used for rendering useful error messages to user when providing input via CLI
+// Used for rendering useful error messages to user when recieving input via CLI
 const validateStringIsPositiveNumber = (input: string): boolean | string => {
   if (typeof input !== "string") {
     return "Input is not a string";
