@@ -19,14 +19,11 @@ const COMPOUND_FREQUENCY_VALUES = {
   [COMPOUND_FREQUENCIES.maturity]: 0,
 };
 
-export type CompoundFrequency =
-  (typeof COMPOUND_FREQUENCY_VALUES)[COMPOUND_FREQUENCIES];
-
 export type TermDeposit = {
   principle: number;
   annualRate: number;
   months: number;
-  compoundFrequency: CompoundFrequency;
+  compoundFrequency: number;
 };
 
 export type UnsafeInput = Partial<{
