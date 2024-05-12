@@ -29,11 +29,11 @@ export type TermDeposit = {
   compoundFrequency: CompoundFrequency;
 };
 
-export type UnsafeInput = {
+export type UnsafeInput = Partial<{
   principle: string;
   annualRate: string;
   months: string;
   compoundFrequency: string;
-};
+}>;
 
 export { COMPOUND_FREQUENCY_VALUES };
