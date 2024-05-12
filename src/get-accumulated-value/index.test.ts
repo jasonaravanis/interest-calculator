@@ -41,7 +41,11 @@ it("uses simple interest calculator for deposit with interest paid at maturity",
   expect(simpleSpy).toHaveBeenCalled();
 });
 
-it.each(Object.keys(COMPOUND_FREQUENCIES))(
+it.each(
+  Object.values(COMPOUND_FREQUENCIES).filter(
+    (freq) => freq !== COMPOUND_FREQUENCIES.maturity
+  )
+)(
   "uses compound interest calculator for deposit with interest paid %s",
   (compoundFrequency) => {
     const compoundSpy = jest.spyOn(compound, "getCompoundInterest");
@@ -51,7 +55,8 @@ it.each(Object.keys(COMPOUND_FREQUENCIES))(
       principle: 10000,
       annualRate: 0.011,
       months: 36,
-      compoundFrequency: COMPOUND_FREQUENCIES[compoundFrequency],
+      compoundFrequency:
+        COMPOUND_FREQUENCY_VALUES[COMPOUND_FREQUENCIES[compoundFrequency]],
     };
 
     getAccumulatedValue(deposit);
